@@ -1,2 +1,1 @@
-# Omega-Launcher
-
+# Omega Launcher
