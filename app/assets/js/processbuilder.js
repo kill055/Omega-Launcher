@@ -49,9 +49,9 @@ class ProcessBuilder {
         const tempNativePath = path.join(os.tmpdir(), ConfigManager.getTempNativeFolder(), crypto.pseudoRandomBytes(16).toString('hex'))
         process.throwDeprecation = true
         this.setupLiteLoader()
-        logger.info('Using liteloader:', this.usingLiteLoader)
+        logger.info('Utilizzo di liteloader:', this.usingLiteLoader)
         this.usingFabricLoader = this.server.modules.some(mdl => mdl.rawModule.type === Type.Fabric)
-        logger.info('Using fabric loader:', this.usingFabricLoader)
+        logger.info('Utilizzo del caricatore di tessuti:', this.usingFabricLoader)
         const modObj = this.resolveModConfiguration(ConfigManager.getModConfiguration(this.server.rawServer.id).mods, this.server.modules)
         
         // Mod list below 1.13
@@ -75,7 +75,7 @@ class ProcessBuilder {
         const loggableArgs = [...args]
         loggableArgs[loggableArgs.findIndex(x => x === this.authUser.accessToken)] = '**********'
 
-        logger.info('Launch Arguments:', loggableArgs)
+        logger.info('Argomenti di avvio:', loggableArgs)
 
         const child = child_process.spawn(ConfigManager.getJavaExecutable(this.server.rawServer.id), args, {
             cwd: this.gameDir,
@@ -97,12 +97,12 @@ class ProcessBuilder {
             data.trim().split('\n').forEach(x => console.log(`\x1b[31m[Minecraft]\x1b[0m ${x}`))
         })
         child.on('close', (code) => {
-            logger.info('Exited with code', code)
+            logger.info('Uscita con codice', code)
             fs.remove(tempNativePath, (err) => {
                 if(err){
-                    logger.warn('Error while deleting temp dir', err)
+                    logger.warn('Errore durante l\'eliminazione della directory temporanea', err)
                 } else {
-                    logger.info('Temp dir deleted successfully.')
+                    logger.info('Cartella temporanea eliminata correttamente.')
                 }
             })
         })
@@ -752,7 +752,7 @@ class ProcessBuilder {
                         if(!shouldExclude){
                             fs.writeFile(path.join(tempNativePath, fileName), zipEntries[i].getData(), (err) => {
                                 if(err){
-                                    logger.error('Error while extracting native library:', err)
+                                    logger.error('Errore durante l\'estrazione della libreria nativa:', err)
                                 }
                             })
                         }
@@ -803,7 +803,7 @@ class ProcessBuilder {
                         if(!shouldExclude){
                             fs.writeFile(path.join(tempNativePath, extractName), zipEntries[i].getData(), (err) => {
                                 if(err){
-                                    logger.error('Error while extracting native library:', err)
+                                    logger.error('Errore durante l\'estrazione della libreria nativa:', err)
                                 }
                             })
                         }

@@ -21,14 +21,14 @@ process.traceDeprecation = true
 
 // Disable eval function.
 window.eval = global.eval = function () {
-    throw new Error('Sorry, this app does not support window.eval().')
+    throw new Error('Spiacenti, questa app non supporta window.eval().')
 }
 
 // Display warning when devtools window is opened.
 remote.getCurrentWebContents().on('devtools-opened', () => {
-    console.log('%cThe console is dark and full of terrors.', 'color: white; -webkit-text-stroke: 4px #a02d2a; font-size: 60px; font-weight: bold')
-    console.log('%cIf you\'ve been told to paste something here, you\'re being scammed.', 'font-size: 16px')
-    console.log('%cUnless you know exactly what you\'re doing, close this window.', 'font-size: 16px')
+    console.log('%cLa console è buia e piena di terrori.', 'color: white; -webkit-text-stroke: 4px #a02d2a; font-size: 60px; font-weight: bold')
+    console.log('%cSe ti è stato chiesto di incollare qualcosa qui, sei stato truffato.', 'font-size: 16px')
+    console.log('%cSe non sai esattamente cosa stai facendo, chiudi questa finestra.', 'font-size: 16px')
 })
 
 // Disable zoom, needed for darwin.
@@ -41,11 +41,11 @@ if(!isDev){
     ipcRenderer.on('autoUpdateNotification', (event, arg, info) => {
         switch(arg){
             case 'checking-for-update':
-                loggerAutoUpdater.info('Checking for update..')
+                loggerAutoUpdater.info('Controllo dell\'aggiornamento..')
                 settingsUpdateButtonStatus(Lang.queryJS('uicore.autoUpdate.checkingForUpdateButton'), true)
                 break
             case 'update-available':
-                loggerAutoUpdater.info('New update available', info.version)
+                loggerAutoUpdater.info('Nuovo aggiornamento disponibile', info.version)
                 
                 if(process.platform === 'darwin'){
                     info.darwindownload = `https://github.com/kill055/Omega-Launcher/releases/download/v${info.version}/Helios-Launcher-setup-${info.version}${process.arch === 'arm64' ? '-arm64' : '-x64'}.dmg`
@@ -55,7 +55,7 @@ if(!isDev){
                 populateSettingsUpdateInformation(info)
                 break
             case 'update-downloaded':
-                loggerAutoUpdater.info('Update ' + info.version + ' ready to be installed.')
+                loggerAutoUpdater.info('Aggiornamento ' + info.version + ' pronto per essere installato.')
                 settingsUpdateButtonStatus(Lang.queryJS('uicore.autoUpdate.installNowButton'), false, () => {
                     if(!isDev){
                         ipcRenderer.send('autoUpdateAction', 'installUpdateNow')
@@ -64,7 +64,7 @@ if(!isDev){
                 showUpdateUI(info)
                 break
             case 'update-not-available':
-                loggerAutoUpdater.info('No new update found.')
+                loggerAutoUpdater.info('Nessun nuovo aggiornamento trovato.')
                 settingsUpdateButtonStatus(Lang.queryJS('uicore.autoUpdate.checkForUpdatesButton'))
                 break
             case 'ready':
@@ -76,17 +76,17 @@ if(!isDev){
             case 'realerror':
                 if(info != null && info.code != null){
                     if(info.code === 'ERR_UPDATER_INVALID_RELEASE_FEED'){
-                        loggerAutoUpdater.info('No suitable releases found.')
+                        loggerAutoUpdater.info('Non sono state trovate versioni idonee.')
                     } else if(info.code === 'ERR_XML_MISSED_ELEMENT'){
-                        loggerAutoUpdater.info('No releases found.')
+                        loggerAutoUpdater.info('Nessuna versione trovata.')
                     } else {
-                        loggerAutoUpdater.error('Error during update check..', info)
-                        loggerAutoUpdater.debug('Error Code:', info.code)
+                        loggerAutoUpdater.error('Errore durante il controllo degli aggiornamenti..', info)
+                        loggerAutoUpdater.debug('Codice errore:', info.code)
                     }
                 }
                 break
             default:
-                loggerAutoUpdater.info('Unknown argument', arg)
+                loggerAutoUpdater.info('Argomento sconosciuto', arg)
                 break
         }
     })
@@ -134,7 +134,7 @@ $(function(){
 
 document.addEventListener('readystatechange', function () {
     if (document.readyState === 'interactive'){
-        loggerUICore.info('UICore Initializing..')
+        loggerUICore.info('Inizializzazione UICore..')
 
         // Bind close button.
         Array.from(document.getElementsByClassName('fCb')).map((val) => {

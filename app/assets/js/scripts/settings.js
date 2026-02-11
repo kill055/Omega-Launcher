@@ -394,10 +394,10 @@ ipcRenderer.on(MSFT_OPCODE.REPLY_LOGIN, (_, ...arguments_) => {
                 // This is probably if you messed up the app registration with Azure.      
                 let error = queryMap.error // Error might be 'access_denied' ?
                 let errorDesc = queryMap.error_description
-                console.log('Error getting authCode, is Azure application registered correctly?')
+                console.log('Errore durante l\'ottenimento del codice di autorizzazione. L\'applicazione Azure è registrata correttamente?')
                 console.log(error)
                 console.log(errorDesc)
-                console.log('Full query map: ', queryMap)
+                console.log('Mappa completa delle query: ', queryMap)
                 setOverlayContent(
                     error,
                     errorDesc,
@@ -411,7 +411,7 @@ ipcRenderer.on(MSFT_OPCODE.REPLY_LOGIN, (_, ...arguments_) => {
             })
         } else {
 
-            msftLoginLogger.info('Acquired authCode, proceeding with authentication.')
+            msftLoginLogger.info('Acquisito authCode, procedo con l\'autenticazione.')
 
             const authCode = queryMap.code
             AuthManager.addMicrosoftAccount(authCode).then(value => {
@@ -424,11 +424,11 @@ ipcRenderer.on(MSFT_OPCODE.REPLY_LOGIN, (_, ...arguments_) => {
 
                     let actualDisplayableError
                     if(isDisplayableError(displayableError)) {
-                        msftLoginLogger.error('Error while logging in.', displayableError)
+                        msftLoginLogger.error('Errore durante l\'accesso.', displayableError)
                         actualDisplayableError = displayableError
                     } else {
                         // Uh oh.
-                        msftLoginLogger.error('Unhandled error during login.', displayableError)
+                        msftLoginLogger.error('Errore non gestito durante l\'accesso.', displayableError)
                         actualDisplayableError = Lang.queryJS('login.error.unknown')
                     }
 
@@ -546,7 +546,7 @@ ipcRenderer.on(MSFT_OPCODE.REPLY_LOGOUT, (_, ...arguments_) => {
 
             if(arguments_.length > 1 && arguments_[1] === MSFT_ERROR.NOT_FINISHED) {
                 // User cancelled.
-                msftLogoutLogger.info('Logout cancelled by user.')
+                msftLogoutLogger.info('Disconnessione annullata dall\'utente.')
                 return
             }
 
@@ -567,7 +567,7 @@ ipcRenderer.on(MSFT_OPCODE.REPLY_LOGOUT, (_, ...arguments_) => {
         const isLastAccount = arguments_[2]
         const prevSelAcc = ConfigManager.getSelectedAccount()
 
-        msftLogoutLogger.info('Logout Successful. uuid:', uuid)
+        msftLogoutLogger.info('Disconnessione avvenuta con successo. uuid:', uuid)
         
         AuthManager.removeMicrosoftAccount(uuid)
             .then(() => {

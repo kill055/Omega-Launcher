@@ -215,11 +215,11 @@ loginButton.addEventListener('click', () => {
 
         let actualDisplayableError
         if(isDisplayableError(displayableError)) {
-            msftLoginLogger.error('Error while logging in.', displayableError)
+            msftLoginLogger.error('Errore durante l\'accesso.', displayableError)
             actualDisplayableError = displayableError
         } else {
             // Uh oh.
-            msftLoginLogger.error('Unhandled error during login.', displayableError)
+            msftLoginLogger.error('Errore non gestito durante l\'accesso.', displayableError)
             actualDisplayableError = Lang.queryJS('login.error.unknown')
         }
 

@@ -140,8 +140,8 @@ exports.load = function(){
             doValidate = true
         } catch (err){
             logger.error(err)
-            logger.info('Configuration file contains malformed JSON or is corrupt.')
-            logger.info('Generating a new configuration file.')
+            logger.info('Il file di configurazione contiene un JSON non valido o è danneggiato.')
+            logger.info('Generazione di un nuovo file di configurazione.')
             fs.ensureDirSync(path.join(configPath, '..'))
             config = DEFAULT_CONFIG
             exports.save()
@@ -151,7 +151,7 @@ exports.load = function(){
             exports.save()
         }
     }
-    logger.info('Successfully Loaded')
+    logger.info('Caricato con successo')
 }
 
 /**

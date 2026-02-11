@@ -25,15 +25,15 @@ exports.initRPC = function(genSettings, servSettings, initialDetails = Lang.quer
     }
 
     client.on('ready', () => {
-        logger.info('Discord RPC Connected')
+        logger.info('Discord RPC connesso')
         client.setActivity(activity)
     })
     
     client.login({clientId: genSettings.clientId}).catch(error => {
         if(error.message.includes('ENOENT')) {
-            logger.info('Unable to initialize Discord Rich Presence, no client detected.')
+            logger.info('Impossibile inizializzare Discord Rich Presence, nessun client rilevato.')
         } else {
-            logger.info('Unable to initialize Discord Rich Presence: ' + error.message, error)
+            logger.info('Impossibile inizializzare Discord Rich Presence: ' + error.message, error)
         }
     })
 }

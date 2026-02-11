@@ -282,11 +282,11 @@ exports.removeMojangAccount = async function(uuid){
             ConfigManager.save()
             return Promise.resolve()
         } else {
-            log.error('Error while removing account', response.error)
+            log.error('Errore durante la rimozione dell\'account', response.error)
             return Promise.reject(response.error)
         }
     } catch (err){
-        log.error('Error while removing account', err)
+        log.error('Errore durante la rimozione dell\'account', err)
         return Promise.reject(err)
     }
 }
@@ -304,7 +304,7 @@ exports.removeMicrosoftAccount = async function(uuid){
         ConfigManager.save()
         return Promise.resolve()
     } catch (err){
-        log.error('Error while removing account', err)
+        log.error('Errore durante la rimozione dell\'account', err)
         return Promise.reject(err)
     }
 }
@@ -330,14 +330,14 @@ async function validateSelectedMojangAccount(){
                 ConfigManager.updateMojangAuthAccount(current.uuid, session.accessToken)
                 ConfigManager.save()
             } else {
-                log.error('Error while validating selected profile:', refreshResponse.error)
-                log.info('Account access token is invalid.')
+                log.error('Errore durante la convalida del profilo selezionato:', refreshResponse.error)
+                log.info('Il token di accesso all\'account non è valido.')
                 return false
             }
-            log.info('Account access token validated.')
+            log.info('Token di accesso all\'account convalidato.')
             return true
         } else {
-            log.info('Account access token validated.')
+            log.info('Token di accesso all\'account convalidato.')
             return true
         }
     }
